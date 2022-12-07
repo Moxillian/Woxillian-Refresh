@@ -7,4 +7,5 @@ CHANGES
 -Playing Card deck that uses spellbook functionality to cast unique spells!
 -Removal of top hat loot bloat!
 -Possible rework of top hat functionality?
+-Completed Quotes!
 -uhhhh....
