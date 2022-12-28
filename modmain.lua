@@ -126,28 +126,3 @@ for i, v in pairs(magics) do
         inst:AddTag("wox_magic")
     end)
 end
-
-local function DoCastSpell(inst, doer)
-	local health = doer.components.health
-	if health ~= nil and not health:IsDead() then
-		local data = true
-		if doer.components.oldager ~= nil then
-			doer.components.oldager:StopDamageOverTime()
-		else
-			data = false
-		end
-		health:DoDelta(TUNING.POCKETWATCH_HEAL_HEALING, data, inst.prefab)
-
-		local fx = SpawnPrefab((doer.components.rider ~= nil and doer.components.rider:IsRiding()) and "pocketwatch_heal_fx_mount" or "pocketwatch_heal_fx")
-		fx.entity:SetParent(doer.entity)
-
-		inst.components.rechargeable:Discharge(TUNING.POCKETWATCH_HEAL_COOLDOWN)
-		return true
-	end
-end
-
-env.AddPrefabPostInit("pocketwatch_heal", function(inst)
-	if inst.components.pocketwatch then
-		inst.components.pocketwatch.DoCastSpell = DoCastSpell
-	end
-end)
